@@ -18,6 +18,14 @@ MotionSurveillance is a Ruby-based video surveillance system using the [Motion](
  - Event logging/management
 ##How It Works
 
+MotionSurveillance is comprised of three primary components: 
+
+- System: system cron job that periodically wakes up the Security Manager
+- Security Manager: checks to see if Security Daemon is running, and If it isn't, determine whether it should
+- Security Daemon: while the security system is active, periodically checks to see if it should continue to run
+
+![MotionSurveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/security_activity_diagram.png)
+
 ## Requirements
 
 ## Installation
