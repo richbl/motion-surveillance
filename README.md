@@ -16,6 +16,7 @@ MotionSurveillance is a Ruby-based video surveillance system using the [Motion](
 		 - [planned]
 	 - Optionally play audio file on security system enable/disable events
  - Event logging/management
+
 ##How It Works
 
 MotionSurveillance is comprised of three primary components: 
