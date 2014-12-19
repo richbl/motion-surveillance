@@ -1,21 +1,21 @@
-MotionSurveillance
-===================
+#**MotionSurveillance**
 
 MotionSurveillance is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. 
 
 ##Features
 
- - Motion detection of numerous IP and webcams (courtesy of [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")). See [this list](http://www.lavrsen.dk/foswiki/bin/view/Motion/WorkingDevices "Device Compatibility") for device compatibility
- - Automated email notification on valid motion detection event
-	 - Include or exclude motion image or video clip
-	 - SMTP-based (*e.g.*, Gmail)
+ - Movement detection support of IP and webcams (courtesy of [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")). See [this list](http://www.lavrsen.dk/foswiki/bin/view/Motion/WorkingDevices "Device Compatibility") for device compatibility
+ - Automated email notification on valid detection events
+	 - Optionally Include event image or video clip
+	 - SMTP-support for compatibility with most webmail services (*e.g.*, Gmail)
+	 - POP3-support [planned]
  - Automated enabling/disabling of security system based on Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device existence
-	 - [MAC](http://en.wikipedia.org/wiki/MAC_address "MAC address") address (IPv4-based)
-		 - A device that joins/leaves a home LAN will trigger security system status
+	 - [MAC](http://en.wikipedia.org/wiki/MAC_address "MAC address") address sensing
 		 - Multiple devices can be specified
-	 - Bluetooth sensing
-		 - [planned]
-	 - Optionally play audio file on security system enable/disable events
+		 - IPv4 protocol support
+		 - IPv6 protocol support [planned]
+	 - Bluetooth sensing (RSSI) [planned]
+	 - Optionally play an audio file on surveillance system enable/disable
  - Event logging/management
  
 ##How It Works
@@ -28,22 +28,27 @@ Operationally, MotionSurveillance is comprised of three primary components:
 - **Security Manager**: checks to see if **Security Daemon** is running, and If it isn't, determine whether it should. The **Security Manager** component is responsible for starting the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software package
 - **Security Daemon**: while the security system is active, periodically checks to see if it should continue to run. The **Security Daemon** is responsible for stopping the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software package
 
-The UML activity diagram below shows the flow of activity for each of these components.
+The activity diagram below shows the work flow for each of these components:
 
-![MotionSurveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/security_activity_diagram.png)
+![MotionSurveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/security_activity_diagram.png "MotionSurveillance Activity Diagram")
 
 ## Requirements
 
  - A Linux-based operating system
-	 - While MotionSurveillance was written and tested under Linux (Ubuntu 14.04 LTS), there should be no reason why this won't work just fine under other Linux distributions
+	 - While MotionSurveillance was written and tested under Linux (Ubuntu 14.04 LTS), there should be no reason why this won't work just fine under other Linux distributions. Unix-like tools used by MotionSurveillance include:
+		 - [ps](http://en.wikipedia.org/wiki/Ps_%28Unix%29): process status
+		 - [arp](http://en.wikipedia.org/wiki/Address_Resolution_Protocol): address resolution protocol
+		 - [grep](http://en.wikipedia.org/wiki/Grep): globally search a regular expression and print
+		 - [ping](http://en.wikipedia.org/wiki/Ping_(networking_utility)): ICMP network packet echo/response tool
+		 - [aplay](http://en.wikipedia.org/wiki/Aplay): ALSA audio player (optional)
  - [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") correctly installed and configured with appropriate video devices
  - [Ruby](https://www.ruby-lang.org/en/ "Ruby") (2.0+) correctly installed and configured
 	 - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured
  - Supplemental Ruby packages ("gems"):
-	 - mail gem (2.5.4+): https://rubygems.org/gems/mail
-	 - inifile gem (2.0.2+): https://rubygems.org/gems/inifile
-	 - logger gem (1.2.8+): https://rubygems.org/gems/logger
-	 - thread gem (0.1.4+): https://rubygems.org/gems/thread
+	 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
+	 - [inifile](https://rubygems.org/gems/inifile) (2.0.2+)
+	 - [logger](https://rubygems.org/gems/logger) (1.2.8+)
+	 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
 
 ## Installation
 TBD
