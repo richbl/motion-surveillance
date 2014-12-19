@@ -8,7 +8,7 @@ MotionSurveillance is a Ruby-based video surveillance system using the [Motion](
  - Motion detection of numerous IP and webcams (courtesy of [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")). See [this list](http://www.lavrsen.dk/foswiki/bin/view/Motion/WorkingDevices "Device Compatibility") for device compatibility
  - Automated email notification on valid motion detection event
 	 - Include or exclude motion image or video clip
-	 - SMTP-based (e.g, Gmail)
+	 - SMTP-based (*e.g.*, Gmail)
  - Automated enabling/disabling of security system based on Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device existence
 	 - [MAC](http://en.wikipedia.org/wiki/MAC_address "MAC address") address (IPv4-based)
 		 - A device that joins/leaves a home LAN will trigger security system status
@@ -37,13 +37,13 @@ The UML activity diagram below shows the flow of activity for each of these comp
  - A Linux-based operating system
 	 - While MotionSurveillance was written and tested under Linux (Ubuntu 14.04 LTS), there should be no reason why this won't work just fine under other Linux distributions
  - [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") correctly installed and configured with appropriate video devices
- - [Ruby](https://www.ruby-lang.org/en/ "Ruby") correctly installed and configured
+ - [Ruby](https://www.ruby-lang.org/en/ "Ruby") (2.0+) correctly installed and configured
 	 - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured
  - Supplemental Ruby packages ("gems"):
-	 - mail gem: https://rubygems.org/gems/mail
-	 - inifile gem: https://rubygems.org/gems/inifile
-	 - logger gem: https://rubygems.org/gems/logger
-	 - thread gem: https://rubygems.org/gems/thread
+	 - mail gem (2.5.4+): https://rubygems.org/gems/mail
+	 - inifile gem (2.0.2+): https://rubygems.org/gems/inifile
+	 - logger gem (1.2.8+): https://rubygems.org/gems/logger
+	 - thread gem (0.1.4+): https://rubygems.org/gems/thread
 
 ## Installation
 TBD
