@@ -42,7 +42,7 @@ The activity diagram below shows the work flow for each of these components:
 		 - [ping](http://en.wikipedia.org/wiki/Ping_(networking_utility)): ICMP network packet echo/response tool
 		 - [aplay](http://en.wikipedia.org/wiki/Aplay): ALSA audio player (optional)
  - [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") correctly installed and configured with appropriate video devices
- - [Ruby](https://www.ruby-lang.org/en/ "Ruby") (2.0+) correctly installed and configured
+ - [Ruby](https://www.ruby-lang.org/en/ "Ruby") (1.9+) correctly installed and configured
 	 - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured
  - Supplemental Ruby packages ("gems"):
 	 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
