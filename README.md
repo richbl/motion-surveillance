@@ -47,7 +47,6 @@ The activity diagram below shows the work flow for each of these components:
  - Supplemental Ruby packages ("gems"):
 	 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
 	 - [inifile](https://rubygems.org/gems/inifile) (2.0.2+)
-	 - [logger](https://rubygems.org/gems/logger) (1.2.8+)
 	 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
 
 ## Installation
