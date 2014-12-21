@@ -17,16 +17,16 @@ class MotionMail
 
   CFG_FILE_PATH = "/etc/motion_mail"
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # create the following event details based on media_filename:
+  # self.get_event_details(media_filename) creates the following event details based on 
+  # media_filename:
   #
   #   event_number - Motion-generated event number
   #   event_date - Motion-generated event datetime
   #
-  # NOTE that this method assumes that media_filename follows the
-  # default Motion file-naming convention of %v-%Y%m%d%H%M%S (for movies)
-  # or %v-%Y%m%d%H%M%S-%q (for pictures), where:
+  # NOTE that this method assumes that media_filename follows the default Motion file-naming 
+  # convention of %v-%Y%m%d%H%M%S (for movies) or %v-%Y%m%d%H%M%S-%q (for pictures), where:
   #
   #   %v - Motion-generated event number
   #   %Y%m%d%H%M%S - ISO 8601 date, with hours, minutes, seconds notion
@@ -43,9 +43,10 @@ class MotionMail
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # parse configuration file (.cfg)
+  # self.parse_cfg_file parses the accompanying configuration file with default name 
+  # motion_mail.cfg
   #
 
   def self.parse_cfg_file
@@ -73,9 +74,9 @@ class MotionMail
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # create application log file
+  # self.create_logfile(cfg_data) creates the application log file
   #
   # see logger documentation for logfile management options
   #
@@ -84,7 +85,7 @@ class MotionMail
 
   def self.create_logfile(cfg_data)
 
-    if cfg_data[:cfg_section_general]["logging_enable"].eql? "1"
+    if cfg_data[:cfg_section_general]["logging_enable"].eql? 1
 
       $LOGGING = 1
       $LOG = Logger.new(cfg_data[:cfg_section_general]["logfile_path"] + '/motion_mail.log', 0, 50 * 1024 * 1024)
@@ -97,10 +98,10 @@ class MotionMail
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # create event by parsing the following command line arguments
-  # passed in via the on_picture_save or the on_movie_end command:
+  # self.parse_event creates an event by parsing the following command line arguments passed in 
+  # via the on_picture_save or the on_movie_end command:
   #
   #  ARGV[0] pixels detected
   #  ARGV[1] media filename
@@ -151,9 +152,10 @@ class MotionMail
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # generate smtp email
+  # self.generate_smtp_email(cfg_data, event_details, event_media) generates and mails an smtp 
+  # email
   #
   # see mail documentation for mail management options (e.g., POP3)
   #
@@ -195,8 +197,8 @@ class MotionMail
     }
 
     replacement_string.each { |k, v| cfg_data[:cfg_section_email]["email_body"].sub!(k, v)}
-    mail.set_body(cfg_data[:cfg_section_email]["email_body"])
 
+    mail.set_body(cfg_data[:cfg_section_email]["email_body"])
     mail.send_mail
 
     if $LOGGING
@@ -205,8 +207,7 @@ class MotionMail
 
   end
 
-  # ---------------------------------------------------------------
-  #
+  # -----------------------------------------------------------------------------------------------
 
   cfg_data = parse_cfg_file
   create_logfile(cfg_data)
