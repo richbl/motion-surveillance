@@ -43,9 +43,9 @@ The activity diagram below shows the work flow for each of these components:
 		 - [aplay](http://en.wikipedia.org/wiki/Aplay): ALSA audio player (optional)
  - [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") correctly installed and configured with appropriate video devices
  - [Ruby](https://www.ruby-lang.org/en/ "Ruby") (2.0+) correctly installed and configured
- - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured with the following gems:
-	 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
-	 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
+	 - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured with the following gems:
+		 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
+		 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
 
 ## Installation
 TBD
