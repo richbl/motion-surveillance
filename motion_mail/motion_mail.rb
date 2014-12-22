@@ -9,23 +9,21 @@ class MotionMail
 
   require 'mail'
   require 'time'
-  require 'inifile'
   require 'logger'
   require 'pathname'
 
   require_relative 'lib_mail'
-
-  CFG_FILE_PATH = "/etc/motion_mail"
+  require_relative 'mail_config'
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.get_event_details(media_filename) creates the following event details based on 
+  # self.get_event_details(media_filename) creates the following event details based on
   # media_filename:
   #
   #   event_number - Motion-generated event number
   #   event_date - Motion-generated event datetime
   #
-  # NOTE that this method assumes that media_filename follows the default Motion file-naming 
+  # NOTE that this method assumes that media_filename follows the default Motion file-naming
   # convention of %v-%Y%m%d%H%M%S (for movies) or %v-%Y%m%d%H%M%S-%q (for pictures), where:
   #
   #   %v - Motion-generated event number
@@ -45,50 +43,19 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.parse_cfg_file parses the accompanying configuration file with default name 
-  # motion_mail.cfg
-  #
-
-  def self.parse_cfg_file
-
-    ini_file = IniFile.load(CFG_FILE_PATH + '/motion_mail.cfg')
-
-    if ini_file.nil?
-
-      puts "No configuration file found. Exiting."
-      exit 1
-
-    end
-
-    general_data = ini_file['General']
-    email_data = ini_file['Email']
-
-    if general_data.empty? or email_data.empty?
-
-      puts "Corrupt configuration file. Exiting."
-      exit 1
-
-    end
-
-    return {:cfg_section_general => general_data, :cfg_section_email => email_data}
-
-  end
-
-  # -----------------------------------------------------------------------------------------------
-  #
-  # self.create_logfile(cfg_data) creates the application log file
+  # self.create_logfile() creates the application log file
   #
   # see logger documentation for logfile management options
   #
-  # NOTE that this log file is recreated whenever >50MB in size
+  # NOTE: this log file is recreated whenever >50MB in size
   #
 
-  def self.create_logfile(cfg_data)
+  def self.create_logfile
 
-    if cfg_data[:cfg_section_general]["logging_enable"].eql? 1
+    if MailConfig::LOGGING.eql? 1
 
       $LOGGING = 1
-      $LOG = Logger.new(cfg_data[:cfg_section_general]["logfile_path"] + '/motion_mail.log', 0, 50 * 1024 * 1024)
+      $LOG = Logger.new(File.expand_path(File.dirname(__FILE__)) + '/motion_mail.log', 0, 50 * 1024 * 1024)
 
     else
 
@@ -100,7 +67,7 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.parse_event creates an event by parsing the following command line arguments passed in 
+  # self.parse_event creates an event by parsing the following command line arguments passed in
   # via the on_picture_save or the on_movie_end command:
   #
   #  ARGV[0] pixels detected
@@ -154,34 +121,34 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.generate_smtp_email(cfg_data, event_details, event_media) generates and mails an smtp 
+  # self.generate_smtp_email(event_details, event_media) generates and mails an smtp
   # email
   #
   # see mail documentation for mail management options (e.g., POP3)
   #
 
-  def self.generate_smtp_email(cfg_data, event_details, event_media)
+  def self.generate_smtp_email(event_details, event_media)
 
     mail = LibMail::SMTP.new
 
     # assign SMTP values
     #
     mail.set_delivery_options(
-    cfg_data[:cfg_section_email]["smtp_address"],
-    cfg_data[:cfg_section_email]["smtp_port"].to_i,
-    cfg_data[:cfg_section_email]["smtp_domain"],
-    cfg_data[:cfg_section_email]["smtp_username"],
-    cfg_data[:cfg_section_email]["smtp_password"],
-    cfg_data[:cfg_section_email]["smtp_authentication"],
-    cfg_data[:cfg_section_email]["smtp_enable_starttls_auto"]
+      MailConfig::SMTP_ADDRESS,
+      MailConfig::SMTP_PORT.to_i,
+      MailConfig::SMTP_DOMAIN,
+      MailConfig::SMTP_USERNAME,
+      MailConfig::SMTP_PASSWORD,
+      MailConfig::SMTP_AUTHENTICATION,
+      MailConfig::SMTP_ENABLE_STARTTLS_AUTO
     )
 
     # generate email header
     #
     mail.set_header(
-    cfg_data[:cfg_section_email]["email_to"],
-    cfg_data[:cfg_section_email]["email_from"],
-    'Motion Detected on Camera #' + event_details[:camera_number] + " at " + event_details[:date]
+      MailConfig::EMAIL_TO,
+      MailConfig::EMAIL_FROM,
+      'Motion Detected on Camera #' + event_details[:camera_number] + " at " + event_details[:date]
     )
 
     # attach media to email
@@ -196,22 +163,21 @@ class MotionMail
       "!CAMERA" => event_details[:camera_number]
     }
 
-    replacement_string.each { |k, v| cfg_data[:cfg_section_email]["email_body"].sub!(k, v)}
+    replacement_string.each { |k, v| MailConfig::EMAIL_BODY.sub!(k, v)}
 
-    mail.set_body(cfg_data[:cfg_section_email]["email_body"])
+    mail.set_body(MailConfig::EMAIL_BODY)
     mail.send_mail
 
     if $LOGGING
-      $LOG.info "Email sent to " + cfg_data[:cfg_section_email]["email_to"] + "."
+      $LOG.info "Email sent to " + MailConfig::EMAIL_TO + "."
     end
 
   end
 
   # -----------------------------------------------------------------------------------------------
 
-  cfg_data = parse_cfg_file
-  create_logfile(cfg_data)
+  create_logfile
   event_details, event_media = parse_event
-  generate_smtp_email(cfg_data, event_details, event_media)
+  generate_smtp_email(event_details, event_media)
 
 end
