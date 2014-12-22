@@ -13,7 +13,7 @@ class MotionMail
   require 'pathname'
 
   require_relative 'lib_mail'
-  require_relative 'mail_config'
+  require_relative 'motion_mail_config'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -52,7 +52,7 @@ class MotionMail
 
   def self.create_logfile
 
-    if MailConfig::LOGGING.eql? 1
+    if MotionMailConfig::LOGGING.eql? 1
 
       $LOGGING = 1
       $LOG = Logger.new(File.expand_path(File.dirname(__FILE__)) + '/motion_mail.log', 0, 50 * 1024 * 1024)
@@ -134,20 +134,20 @@ class MotionMail
     # assign SMTP values
     #
     mail.set_delivery_options(
-      MailConfig::SMTP_ADDRESS,
-      MailConfig::SMTP_PORT.to_i,
-      MailConfig::SMTP_DOMAIN,
-      MailConfig::SMTP_USERNAME,
-      MailConfig::SMTP_PASSWORD,
-      MailConfig::SMTP_AUTHENTICATION,
-      MailConfig::SMTP_ENABLE_STARTTLS_AUTO
+      MotionMailConfig::SMTP_ADDRESS,
+      MotionMailConfig::SMTP_PORT.to_i,
+      MotionMailConfig::SMTP_DOMAIN,
+      MotionMailConfig::SMTP_USERNAME,
+      MotionMailConfig::SMTP_PASSWORD,
+      MotionMailConfig::SMTP_AUTHENTICATION,
+      MotionMailConfig::SMTP_ENABLE_STARTTLS_AUTO
     )
 
     # generate email header
     #
     mail.set_header(
-      MailConfig::EMAIL_TO,
-      MailConfig::EMAIL_FROM,
+      MotionMailConfig::EMAIL_TO,
+      MotionMailConfig::EMAIL_FROM,
       'Motion Detected on Camera #' + event_details[:camera_number] + " at " + event_details[:date]
     )
 
@@ -163,13 +163,13 @@ class MotionMail
       "!CAMERA" => event_details[:camera_number]
     }
 
-    replacement_string.each { |k, v| MailConfig::EMAIL_BODY.sub!(k, v)}
+    replacement_string.each { |k, v| MotionMailConfig::EMAIL_BODY.sub!(k, v)}
 
-    mail.set_body(MailConfig::EMAIL_BODY)
+    mail.set_body(MotionMailConfig::EMAIL_BODY)
     mail.send_mail
 
     if $LOGGING
-      $LOG.info "Email sent to " + MailConfig::EMAIL_TO + "."
+      $LOG.info "Email sent to " + MotionMailConfig::EMAIL_TO + "."
     end
 
   end
