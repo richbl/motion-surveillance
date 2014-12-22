@@ -6,14 +6,14 @@
 #
 
 class SecurityDaemon
-  
+
   require_relative 'lib_motion'
   require_relative 'lib_network'
   require_relative 'lib_audio'
-  
-  require_relative 'security_config'  
 
-  # ---------------------------------------------------------------
+  require_relative 'security_config'
+
+  # -----------------------------------------------------------------------------------------------
   #
   # called by ManageSecurity, scans to see if certain devices
   # defined by their MAC address are on the LAN and:
@@ -33,10 +33,10 @@ class SecurityDaemon
     # the process defined in service_motion or sleeps and repeats scan
     #
     if LibNetwork::find_macs(SecurityConfig::MACS_TO_FIND)
-      
+
       if (SecurityConfig::PLAY_AUDIO.eql? 1)
         LibAudio::play_audio(SecurityConfig::AUDIO_MOTION_STOP)
-      end      
+      end
 
       LibMotion::service_motion('stop')
       exit
