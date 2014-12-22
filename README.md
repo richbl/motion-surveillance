@@ -46,7 +46,6 @@ The activity diagram below shows the work flow for each of these components:
 	 - [Rubygems](https://rubygems.org/ "Rubygems") installed and configured
  - Supplemental Ruby packages ("gems"):
 	 - [mail](https://rubygems.org/gems/mail) (2.5.4+)
-	 - [inifile](https://rubygems.org/gems/inifile) (2.0.2+)
 	 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
 
 ## Installation
