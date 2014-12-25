@@ -7,30 +7,30 @@
 
 class SecurityDaemon
 
-  require_relative 'lib_motion'
-  require_relative 'lib_network'
-  require_relative 'lib_audio'
+  require_relative '../ruby_libs/lib_motion'
+  require_relative '../ruby_libs/lib_network'
+  require_relative '../ruby_libs/lib_audio'
 
   require_relative 'security_config'
 
   # -----------------------------------------------------------------------------------------------
   #
-  # called by ManageSecurity, scans to see if certain devices
-  # defined by their MAC address are on the LAN and:
+  # message pump called by ManageSecurity, scans to see if certain devices defined by their MAC
+  # address are on the LAN and:
   #
-  #   -- If found, stop the process defined in service_motion
-  #   -- If not, sleep and repeat scan
+  #   -- if found, stop the process defined in service_motion
+  #   -- if not, sleep and repeat scan
   #
 
   while true
 
-    # freshen local arp cache to guarantee good results when attempting to find
-    # devices by MAC address
+    # freshen local arp cache to guarantee good results when attempting to find devices by MAC
+    # address
     #
     LibNetwork::ping_hosts(SecurityConfig::IP_BASE, SecurityConfig::IP_RANGE)
 
-    # remaining logic checks for device(s) existence on LAN and either stops
-    # the process defined in service_motion or sleeps and repeats scan
+    # remaining logic checks for device(s) existence on LAN and either stops the process defined
+    # in service_motion or sleeps and repeats scan
     #
     if LibNetwork::find_macs(SecurityConfig::MACS_TO_FIND)
 

@@ -15,6 +15,14 @@ module MotionMailConfig
 
   # -----------------------------------------------------------------------------------------------
   #
+  # logging filename
+  #
+  # ignored if LOGGING == 0
+  #
+  LOGFILENAME = "motion_mail.log"
+
+  # -----------------------------------------------------------------------------------------------
+  #
   # email sender
   #
   EMAIL_FROM = "motion@businesslearninginc.com"

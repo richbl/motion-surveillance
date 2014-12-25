@@ -12,7 +12,7 @@ class MotionMail
   require 'logger'
   require 'pathname'
 
-  require_relative 'lib_mail'
+  require_relative '../ruby_libs/lib_mail'
   require_relative 'motion_mail_config'
 
   # -----------------------------------------------------------------------------------------------
@@ -43,30 +43,6 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.create_logfile() creates the application log file
-  #
-  # see logger documentation for logfile management options
-  #
-  # NOTE: this log file is recreated whenever >50MB in size
-  #
-
-  def self.create_logfile
-
-    if MotionMailConfig::LOGGING.eql? 1
-
-      $LOGGING = 1
-      $LOG = Logger.new(File.expand_path(File.dirname(__FILE__)) + '/motion_mail.log', 0, 50 * 1024 * 1024)
-
-    else
-
-      $LOGGING = 0
-
-    end
-
-  end
-
-  # -----------------------------------------------------------------------------------------------
-  #
   # self.parse_event creates an event by parsing the following command line arguments passed in
   # via the on_picture_save or the on_movie_end command:
   #
@@ -79,7 +55,7 @@ class MotionMail
 
     if ARGV.count != 3 then
 
-      if $LOGGING
+      if $LOG
         $LOG.error "Missing arguments passed. Exiting."
       end
 
@@ -92,7 +68,7 @@ class MotionMail
 
       if !File.exist?(media_filename)
 
-        if $LOGGING
+        if $LOG
           $LOG.error "Media filename argument (" + media_filename +  ") does not exist. Exiting."
         end
 
@@ -106,7 +82,7 @@ class MotionMail
       #
       event_number, event_date = get_event_details(media_filename)
 
-      if $LOGGING
+      if $LOG
         $LOG.info "Arguments passed into routine are " + ARGV.inspect
       end
 
@@ -168,7 +144,7 @@ class MotionMail
     mail.set_body(MotionMailConfig::EMAIL_BODY)
     mail.send_mail
 
-    if $LOGGING
+    if $LOG
       $LOG.info "Email sent to " + MotionMailConfig::EMAIL_TO + "."
     end
 
@@ -176,7 +152,7 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
 
-  create_logfile
+  LibLogging::create_logfile(MotionMailConfig::LOGGING, MotionMailConfig::LOGFILENAME)
   event_details, event_media = parse_event
   generate_smtp_email(event_details, event_media)
 
