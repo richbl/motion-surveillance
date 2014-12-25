@@ -94,7 +94,6 @@ module MotionSecurityConfig
   # NOTE: the assumption is that these devices are active on the LAN, else they won't be detected
   # when ping'd
   #
-  # MACS_TO_FIND = ['80:96:b1:93:5b:41', '80:96:b1:94:d7:a5']
-  MACS_TO_FIND = ['80:96:b1:93:5b:41']
+  MACS_TO_FIND = ['80:96:b1:93:5b:41', '80:96:b1:94:d7:a5']
 
 end
