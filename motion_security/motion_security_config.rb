@@ -1,11 +1,11 @@
 #
-# Copyright (C) 2014 Business Learning Incorporated (www.businesslearninginc.com)
+# Copyright (C) 2015 Business Learning Incorporated (www.businesslearninginc.com)
 #
 # Use of this source code is governed by an MIT-style license
 # that can be found in the LICENSE file
 #
 
-module SecurityConfig
+module MotionSecurityConfig
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -19,7 +19,17 @@ module SecurityConfig
   #
   # ignored if LOGGING == 0
   #
-  LOGFILENAME = "motion_security.log"  
+  LOG_FILENAME = "motion_security.log"
+
+  # -----------------------------------------------------------------------------------------------
+  #
+  # location of logfile (full path)
+  # by default, this is in the motion_security folder (e.g., 
+  # /etc/motion_surveillance/motion_security)
+  #
+  # ignored if LOGGING == 0
+  #
+  LOG_LOCATION = File.expand_path(File.dirname(__FILE__))
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -34,29 +44,29 @@ module SecurityConfig
   # additionally, this variable is used to uniquely identify the active ruby process using the
   # shell grep to determine if the process is running
   #
-  DAEMON_NAME = File.expand_path(File.dirname(__FILE__)) + '/security_daemon.rb'
+  DAEMON_NAME = File.expand_path(File.dirname(__FILE__)) + '/motion_security_daemon.rb'
 
   # -----------------------------------------------------------------------------------------------
   #
-  # enable (1) or disable (0) the play-back of audio on motion service start/stop
+  # enable (1) or disable (0) the play-back of audio on motion daemon start/stop
   #
   PLAY_AUDIO = 1
 
   # -----------------------------------------------------------------------------------------------
   #
-  # the audio file played when the motion service is activated
+  # the audio file played when the motion daemon is activated
   #
   # ignored if PLAY_AUDIO == 0
   #
-  AUDIO_MOTION_START = File.expand_path(File.dirname(__FILE__)) + '/motion_start.wav'
+  AUDIO_MOTION_START = File.expand_path(File.dirname(__FILE__)) + '/motion_security_start.wav'
 
   # -----------------------------------------------------------------------------------------------
   #
-  # the audio file played when the motion service is deactivated
+  # the audio file played when the motion daemon is deactivated
   #
   # ignored if PLAY_AUDIO == 0
   #
-  AUDIO_MOTION_STOP = File.expand_path(File.dirname(__FILE__)) + '/motion_stop.wav'
+  AUDIO_MOTION_STOP = File.expand_path(File.dirname(__FILE__)) + '/motion_security_stop.wav'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -84,6 +94,7 @@ module SecurityConfig
   # NOTE: the assumption is that these devices are active on the LAN, else they won't be detected
   # when ping'd
   #
-  MACS_TO_FIND = ['80:96:b1:93:5b:41', '80:96:b1:94:d7:a5']
+  # MACS_TO_FIND = ['80:96:b1:93:5b:41', '80:96:b1:94:d7:a5']
+  MACS_TO_FIND = ['80:96:b1:93:5b:41']
 
 end
