@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Business Learning Incorporated (www.businesslearninginc.com)
+# Copyright (C) 2015 Business Learning Incorporated (www.businesslearninginc.com)
 #
 # Use of this source code is governed by an MIT-style license
 # that can be found in the LICENSE file
@@ -9,10 +9,10 @@ module LibMail
 
   require 'mail'
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
   # simple SMTP implementation using the ruby mail library
-  #  
+  #
   class SMTP
     def initialize
 
@@ -62,10 +62,10 @@ module LibMail
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
   # placeholder POP3 implementation using the ruby mail library
-  #    
+  #
   module POP3
   end
 

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Business Learning Incorporated (www.businesslearninginc.com)
+# Copyright (C) 2015 Business Learning Incorporated (www.businesslearninginc.com)
 #
 # Use of this source code is governed by an MIT-style license
 # that can be found in the LICENSE file
@@ -10,12 +10,11 @@ module LibNetwork
   require 'thread'
   require 'thwait'
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # uses shell ping (ICMP) to ping the address range passed in
-  # and freshen up local arp cache
+  # self.ping_hosts uses shell ping (ICMP) to ping the address range passed in and freshen up 
+  # the local arp cache
   #
-  
   def self.ping_hosts(ip_base, ip_range)
 
     threads = []
@@ -31,11 +30,10 @@ module LibNetwork
 
   end
 
-  # ---------------------------------------------------------------
+  # -----------------------------------------------------------------------------------------------
   #
-  # uses shell arp to find mac addressed passed in
+  # self.find_macs uses shell arp to find mac addressed passed in
   #
-  
   def self.find_macs(macs_to_find)
 
     mac_list_regex =''
