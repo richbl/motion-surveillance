@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 Business Learning Incorporated (www.businesslearninginc.com)
+# Copyright (C) 2015 Business Learning Incorporated (www.businesslearninginc.com)
 #
 # Use of this source code is governed by an MIT-style license
 # that can be found in the LICENSE file
@@ -12,7 +12,8 @@ class MotionMail
   require 'logger'
   require 'pathname'
 
-  require_relative '../ruby_libs/lib_mail'
+  require_relative '../lib/lib_mail'
+  require_relative '../lib/lib_logging'
   require_relative 'motion_mail_config'
 
   # -----------------------------------------------------------------------------------------------
@@ -30,7 +31,6 @@ class MotionMail
   #   %Y%m%d%H%M%S - ISO 8601 date, with hours, minutes, seconds notion
   #   %q - frame number (value ignored)
   #
-
   def self.get_event_details(media_filename)
 
     event_number, t = File.basename(media_filename).split(/-/)
@@ -50,7 +50,6 @@ class MotionMail
   #  ARGV[1] media filename
   #  ARGV[2] device (camera) number
   #
-
   def self.parse_event
 
     if ARGV.count != 3 then
@@ -102,7 +101,6 @@ class MotionMail
   #
   # see mail documentation for mail management options (e.g., POP3)
   #
-
   def self.generate_smtp_email(event_details, event_media)
 
     mail = LibMail::SMTP.new
@@ -152,7 +150,8 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
 
-  LibLogging::create_logfile(MotionMailConfig::LOGGING, MotionMailConfig::LOGFILENAME)
+  LibLogging::create_logfile(MotionMailConfig::LOGGING, MotionMailConfig::LOG_LOCATION, MotionMailConfig::LOG_FILENAME)
+
   event_details, event_media = parse_event
   generate_smtp_email(event_details, event_media)
 
