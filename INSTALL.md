@@ -35,13 +35,19 @@ The installation of the Motion-Surveillance package includes:
 
 ### 2. Download and Install the Motion-Surveillance Package
 
- 1. Download the repository zip file from the [Motion-Surveillance repository](https://github.com/richbl/motion-surveillance "Motion-Surveillance") and unzip into a temporary folder. Note that only the `motion_surveillance` folder will need to be installed: all other top-level repository files (*e.g.*, `README.MD`) are not required to properly configure and run the Motion-Surveillance package. 
+ 1. Download the repository zip file from the [Motion-Surveillance repository](https://github.com/richbl/motion-surveillance "Motion-Surveillance") and unzip into a temporary folder.
 
-	As indicated above, Motion-Surveillance is organized into three separate package components. The organization of these components is represented in the structure of the `motion_surveillance` directory. 
+ 2. Rename the `motion-surveillance-master` folder to `motion-surveillance`.
 
-	> 	**Note:** the location of this directory structure is not important, but the relative folder structure and names must be preserved (or reflected in the included configuration files).
+ 3. Delete non-essential top-level files, but preserve all three component directories.
 
- 2. Copy the `motion_surveillance` folder into an appropriate local directory.
+	All top-level files (*e.g.*, `README.MD`, `INSTALL.MD`, *etc.*) are not required to properly configure and run the Motion-Surveillance package. They may be safely deleted.
+
+	As indicated above, Motion-Surveillance is organized into three separate package components. The organization of these components is represented in the structure of the `motion_surveillance` folder. 
+
+	> 	**Note:** the location of this folder structure is not important, but the relative folder structure and names must be preserved (or changed in all component configuration files).
+
+ 2. Copy the `motion_surveillance` folder into an appropriate local folder.
 
 	As an example, since the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program installs into the `/etc` folder (as `/etc/motion`) on a Debian-based system, Motion-Surveillance can also be installed into the `/etc` folder, as indicated below:
 
