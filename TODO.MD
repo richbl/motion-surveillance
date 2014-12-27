@@ -2,8 +2,9 @@
 
  - ~~Consolidate logger methods into a single lib~~
  - ~~Move lib references into ruby_libs (rename folder)~~
- - Clean up subprojects
-	 - Mail should function apart from Security (vice-versa)
+ - ~~Create installation document~~
+ - ~~Clean up subprojects~~
+	 - ~~Mail should function apart from Security (vice-versa)~~
  - Find source file for activity diagram (or recreate)
  - Find common terminology (security vs. surveillance)
  - Build-in test cases (how to implement in Ruby)
