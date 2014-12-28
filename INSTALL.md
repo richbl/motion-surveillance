@@ -63,7 +63,7 @@ The installation of the Motion-Surveillance package includes:
 	└── motion_monitor
 	    ├── motion_monitor_config.rb
 	    ├── motion_monitor_daemon.rb
-	    ├── motion_monitor_manage.rb
+	    ├── motion_monitor_manager.rb
 	    ├── motion_start.wav
 	    └── motion_stop.wav
 	```
@@ -81,24 +81,24 @@ The installation of the Motion-Surveillance package includes:
 
 ##4. Integrate Motion-Monitor with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
-Motion-Monitor is responsible for the starting/stopping of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon in response to the presence of Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device IDs (*i.e.*, MAC addresses) on a given network. To integrate this package with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"), a separate job scheduler is needed to periodically "wake up" the Motion-Monitor component to check the status of devices on the monitored network. This is done through the implementation of a [cron job](http://en.wikipedia.org/wiki/Cron "Cron") that periodically executes the `motion_monitor_manage.rb` file.
+Motion-Monitor is responsible for the starting/stopping of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon in response to the presence of Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device IDs (*i.e.*, MAC addresses) on a given network. To integrate this package with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"), a separate job scheduler is needed to periodically "wake up" the Motion-Monitor component to check the status of devices on the monitored network. This is done through the implementation of a [cron job](http://en.wikipedia.org/wiki/Cron "Cron") that periodically executes the `motion_monitor_manager.rb` file.
 
  1. Create a cron job to run Motion-Monitor.
 
-	Edit the system *crontab* (cron table) and add a line that executes the `motion_monitor_manage.rb` file at a regular interval (*e.g.*, every 3 minutes). The example below shows how a *crontab* might be edited on a Debian system:
+	Edit the system *crontab* (cron table) and add a line that executes the `motion_monitor_manager.rb` file at a regular interval (*e.g.*, every 3 minutes). The example below shows how a *crontab* might be edited on a Debian system:
 
 		$ sudo crontab -e
 
-	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_monitor_manage.rb` every 3 minutes as shown in the example below:
+	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_monitor_manager.rb` every 3 minutes as shown in the example below:
 
 		# For more information see the manual pages of crontab(5) and cron(8)
 		#
 		# m h  dom mon dow   command
-		3 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manage.rb
+		3 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manager.rb
 
-	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manage.rb` as appropriate.
+	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manager.rb` as appropriate.
 
-	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manage.rb`) will "wake up" every 3 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
+	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manager.rb`) will "wake up" every 3 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 
 ##5. Integrate Motion-Mail with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
