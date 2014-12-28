@@ -20,7 +20,7 @@ class MotionMonitorDaemon
 
   # -----------------------------------------------------------------------------------------------
   #
-  # message pump called by MotionMonitorManage, scans to see if certain devices defined by their MAC
+  # message pump called by MotionMonitorManager, scans to see if certain devices defined by their MAC
   # address are on the LAN and:
   #
   #   -- if found, stop the process defined in motion_daemon
