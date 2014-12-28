@@ -5,7 +5,7 @@
 # that can be found in the LICENSE file
 #
 
-module LibLogging
+module LibLog
 
   # -----------------------------------------------------------------------------------------------
   #
