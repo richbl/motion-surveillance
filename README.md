@@ -51,13 +51,13 @@ The activity diagram below shows the work flow for each of these components:
 
 ![Motion-Surveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/security_activity_diagram.png "Motion-Surveillance Activity Diagram")
 
-> **Note:** additional information about the Motion-Monitor component can be found in the Motion-Surveillance installation file ([INSTALL.md](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
+> **Note:** additional information about the Motion-Monitor component can be found in the Motion-Surveillance installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
 ###Motion-Mail Operation
 
 Motion-Mail is the Motion-Surveillance component responsible for sending an email whenever a valid movement event is triggered in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion").
 
-These events are triggered through the [*on_picture_save* command ](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnPictureSave "on_picture_save command") and the [on_movie_end command](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnMovieEnd "on_movie_end command") in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") and are how Motion-Mail gets called. 
+These events are triggered through the [`on_picture_save`](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnPictureSave "on_picture_save command") command and the [`on_movie_end`](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnMovieEnd "on_movie_end command") command in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") and are how Motion-Mail gets called. 
 
 The syntax for these [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") commands are:
   
@@ -67,7 +67,7 @@ These commands are managed through the [Motion](http://www.lavrsen.dk/foswiki/bi
 
 Once configured, Motion-Mail will respond to these [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") event [hooks](http://en.wikipedia.org/wiki/Hooking "Hooking"), and an email will be generated and sent along with an optional image file or video clip.
 
-> **Note:** additional information about the Motion-Mail component can be found in the Motion-Surveillance installation file ([INSTALL.md](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
+> **Note:** additional information about the Motion-Mail component can be found in the Motion-Surveillance installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
 ## Motion-Surveillance Requirements
 
@@ -85,7 +85,7 @@ Once configured, Motion-Mail will respond to these [Motion](http://www.lavrsen.d
 		 - [thread](https://rubygems.org/gems/thread) (0.1.4+)
 
 ## Motion-Surveillance Installation
-For complete details on Motion-Surveillance installation, see the installation file ([INSTALL.md](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
+For complete details on Motion-Surveillance installation, see the installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
 ## License
 
