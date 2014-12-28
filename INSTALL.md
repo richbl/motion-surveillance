@@ -4,21 +4,19 @@ The installation of the Motion-Surveillance package includes:
  1. The installation and configuration of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program
  2. The installation and configuration of the Motion-Surveillance package components which include:
  
-   - Motion-Security
+   - Motion-Monitor
    - Motion-Mail
    - Shared component libraries
 
- 3. The integration of Motion-Surveillance Components with Motion
+ 3. The integration of Motion-Surveillance Components with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
-> **Note:** either of the two package components (Motion-Security and Motion-Mail) can be installed separately: it's only important to install the shared component libraries (lib) when installing either component.
+> **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries when installing either component.
 
 ### 1. Install and Configure the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") Software Program
 
  1. Install the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program package.
 
-	Before installing Motion-Surveillance, the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program should to be correctly installed, configured and operational. 
-
-	Details for [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") installation can be found on the [Motion website](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion").
+	Before installing Motion-Surveillance, the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program should to be correctly installed, configured and operational.  Details for [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") installation can be found on the [Motion website](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion").
  
  2. Configure [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") to run as a daemon.
 
@@ -53,7 +51,7 @@ The installation of the Motion-Surveillance package includes:
 	/etc/motion_surveillance/
 	├── lib
 	│   ├── lib_audio.rb
-	│   ├── lib_logging.rb
+	│   ├── lib_log.rb
 	│   ├── lib_mail.rb
 	│   ├── lib_motion.rb
 	│   └── lib_network.rb
@@ -62,45 +60,45 @@ The installation of the Motion-Surveillance package includes:
 	│   ├── motion_mail_config.rb
 	│   └── motion_mail.rb
 	|
-	└── motion_security
-	    ├── motion_security_config.rb
-	    ├── motion_security_daemon.rb
-	    ├── motion_security_manage.rb
-	    ├── motion_security_start.wav
-	    └── motion_security_stop.wav
+	└── motion_monitor
+	    ├── motion_monitor_config.rb
+	    ├── motion_monitor_daemon.rb
+	    ├── motion_monitor_manage.rb
+	    ├── motion_start.wav
+	    └── motion_stop.wav
 	```
 			    
 ## 3. Configure Motion-Surveillance Package Components
 
 1. Edit Motion-Surveillance `*_config.rb` configuration files.
 
-	Both Motion-Mail and Motion-Security should be configured for proper operation. Each component includes a separate `*_config.rb` file which serves the purpose of isolating user-configurable parameters from the rest of the code:
+	Both Motion-Mail and Motion-Monitor should be configured for proper operation. Each component includes a separate `*_config.rb` file which serves the purpose of isolating user-configurable parameters from the rest of the code:
 	
-	- 	`motion_security_config.rb`, found in the `/etc/motion_surveillance/motion_security` folder, is used for configuring component logging options and for setting network parameters used to automate the management of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
+	- 	`motion_monitor_config.rb`, found in the `/etc/motion_surveillance/motion_monitor` folder, is used for configuring component logging options and for setting network parameters used to automate the management of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 	- `motion_mail_config.rb`, found in the `/etc/motion_surveillance/motion_mail` folder, is used primarily to configure SMTP mail settings, as well as component logging options.
 
 	Each configuration file is self-documenting and in most cases, provides examples of common default values.
 
-##4. Integrate Motion-Security with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
+##4. Integrate Motion-Monitor with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
-Motion-Security is responsible for the starting/stopping of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon in response to the presence of Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device IDs (*i.e.*, MAC addresses) on a given network. To integrate this package with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"), a separate job scheduler is needed to periodically "wake up" the Motion-Security component to check the status of devices on the monitored network. This is done through the implementation of a [cron job](http://en.wikipedia.org/wiki/Cron "Cron") that periodically executes the `motion_security_manage.rb` file.
+Motion-Monitor is responsible for the starting/stopping of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon in response to the presence of Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device IDs (*i.e.*, MAC addresses) on a given network. To integrate this package with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"), a separate job scheduler is needed to periodically "wake up" the Motion-Monitor component to check the status of devices on the monitored network. This is done through the implementation of a [cron job](http://en.wikipedia.org/wiki/Cron "Cron") that periodically executes the `motion_monitor_manage.rb` file.
 
- 1. Create a cron job to run Motion-Security.
+ 1. Create a cron job to run Motion-Monitor.
 
-	Edit the system *crontab* (cron table) and add a line that executes the `motion_security_manage.rb` file at a regular interval (*e.g.*, every 3 minutes). The example below shows how a *crontab* might be edited on a Debian system:
+	Edit the system *crontab* (cron table) and add a line that executes the `motion_monitor_manage.rb` file at a regular interval (*e.g.*, every 3 minutes). The example below shows how a *crontab* might be edited on a Debian system:
 
 		$ sudo crontab -e
 
-	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_security_manage.rb` every 3 minutes as shown in the example below:
+	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_monitor_manage.rb` every 3 minutes as shown in the example below:
 
 		# For more information see the manual pages of crontab(5) and cron(8)
 		#
 		# m h  dom mon dow   command
-		3 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_security/motion_security_manage.rb
+		3 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manage.rb
 
-	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_security_manage.rb` as appropriate.
+	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manage.rb` as appropriate.
 
-	After saving the updated *crontab*, Motion-Security (by way of `motion_security_manage.rb`) will "wake up" every 3 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
+	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manage.rb`) will "wake up" every 3 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 
 ##5. Integrate Motion-Mail with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
