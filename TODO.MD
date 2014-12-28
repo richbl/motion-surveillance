@@ -6,7 +6,7 @@
  - ~~Clean up subprojects~~
 	 - ~~Mail should function apart from Security (vice-versa)~~
  - Find source file for activity diagram (or recreate)
- - Find common terminology (security vs. surveillance)
+ - ~~Find common terminology (security vs. surveillance)~~
  - Build-in test cases (how to implement in Ruby)
 
 ##Additional Features
