@@ -37,13 +37,11 @@ The installation of the Motion-Surveillance package includes:
 
  1. Download the repository zip file from the [Motion-Surveillance repository](https://github.com/richbl/motion-surveillance "Motion-Surveillance") and unzip into a temporary folder.
 
- 2. Rename the `motion-surveillance-master` folder to `motion-surveillance`.
-
  3. Delete non-essential top-level files, but preserve all three component directories.
 
 	All top-level files (*e.g.*, `README.MD`, `INSTALL.MD`, *etc.*) are not required to properly configure and run the Motion-Surveillance package. They may be safely deleted.
 
-	As indicated above, Motion-Surveillance is organized into three separate package components. The organization of these components is represented in the structure of the `motion_surveillance` folder. 
+	As indicated above, Motion-Surveillance is organized into three separate package components. The organization of these components is represented in the structure of the parent `motion_surveillance` folder. 
 
 	> 	**Note:** the location of this folder structure is not important, but the relative folder structure and names must be preserved (or changed in all component configuration files).
 
