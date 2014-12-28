@@ -13,7 +13,7 @@ class MotionMail
   require 'pathname'
 
   require_relative '../lib/lib_mail'
-  require_relative '../lib/lib_logging'
+  require_relative '../lib/lib_log'
   require_relative 'motion_mail_config'
 
   # -----------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ class MotionMail
 
   # -----------------------------------------------------------------------------------------------
 
-  LibLogging::create_logfile(MotionMailConfig::LOGGING, MotionMailConfig::LOG_LOCATION, MotionMailConfig::LOG_FILENAME)
+  LibLog::create_logfile(MotionMailConfig::LOGGING, MotionMailConfig::LOG_LOCATION, MotionMailConfig::LOG_FILENAME)
 
   event_details, event_media = parse_event
   generate_smtp_email(event_details, event_media)

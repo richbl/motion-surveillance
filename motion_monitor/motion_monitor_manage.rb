@@ -12,7 +12,7 @@ class MotionMonitorManage
   require_relative '../lib/lib_motion'
   require_relative '../lib/lib_network'
   require_relative '../lib/lib_audio'
-  require_relative '../lib/lib_logging'
+  require_relative '../lib/lib_log'
 
   require_relative 'motion_monitor_config'
 
@@ -47,7 +47,7 @@ class MotionMonitorManage
   #
   # check to see if spawned motion_daemon process already running
   #
-  LibLogging::create_logfile(MotionMonitorConfig::LOGGING, MotionMonitorConfig::LOG_LOCATION, MotionMonitorConfig::LOG_FILENAME)
+  LibLog::create_logfile(MotionMonitorConfig::LOGGING, MotionMonitorConfig::LOG_LOCATION, MotionMonitorConfig::LOG_FILENAME)
 
   if monitor_daemon_running
     exit
