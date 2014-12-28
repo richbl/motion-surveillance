@@ -5,7 +5,7 @@
 # that can be found in the LICENSE file
 #
 
-module MotionSecurityConfig
+module MotionMonitorConfig
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -19,13 +19,13 @@ module MotionSecurityConfig
   #
   # ignored if LOGGING == 0
   #
-  LOG_FILENAME = "motion_security.log"
+  LOG_FILENAME = "motion_monitor.log"
 
   # -----------------------------------------------------------------------------------------------
   #
   # location of logfile (full path)
-  # by default, this is in the motion_security folder (e.g., 
-  # /etc/motion_surveillance/motion_security)
+  # by default, this is in the motion_monitor folder (e.g., 
+  # /etc/motion_surveillance/motion_monitor)
   #
   # ignored if LOGGING == 0
   #
@@ -39,12 +39,12 @@ module MotionSecurityConfig
 
   # -----------------------------------------------------------------------------------------------
   #
-  # the command used to spawn the security process when motion is active
+  # the command used to spawn the monitor process when motion is active
   #
   # additionally, this variable is used to uniquely identify the active ruby process using the
   # shell grep to determine if the process is running
   #
-  DAEMON_NAME = File.expand_path(File.dirname(__FILE__)) + '/motion_security_daemon.rb'
+  DAEMON_NAME = File.expand_path(File.dirname(__FILE__)) + '/motion_monitor_daemon.rb'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -58,7 +58,7 @@ module MotionSecurityConfig
   #
   # ignored if PLAY_AUDIO == 0
   #
-  AUDIO_MOTION_START = File.expand_path(File.dirname(__FILE__)) + '/motion_security_start.wav'
+  AUDIO_MOTION_START = File.expand_path(File.dirname(__FILE__)) + '/motion_start.wav'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -66,7 +66,7 @@ module MotionSecurityConfig
   #
   # ignored if PLAY_AUDIO == 0
   #
-  AUDIO_MOTION_STOP = File.expand_path(File.dirname(__FILE__)) + '/motion_security_stop.wav'
+  AUDIO_MOTION_STOP = File.expand_path(File.dirname(__FILE__)) + '/motion_stop.wav'
 
   # -----------------------------------------------------------------------------------------------
   #
