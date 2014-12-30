@@ -35,7 +35,7 @@ The installation of the Motion-Surveillance package includes:
 
  1. Download the repository zip file from the [Motion-Surveillance repository](https://github.com/richbl/motion-surveillance "Motion-Surveillance") and unzip into a temporary folder.
 
- 3. Delete non-essential top-level files, but preserve all three component directories.
+ 3. Delete non-essential top-level files, but preserve all three component directories: `lib`, `motion_mail`, and `motion_monitor`.
 
 	All top-level files (*e.g.*, `README.MD`, `INSTALL.MD`, *etc.*) are not required to properly configure and run the Motion-Surveillance package. They may be safely deleted.
 
