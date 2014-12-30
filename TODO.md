@@ -11,11 +11,12 @@
 
 ##Additional Features
 
- - Mail
-	 - Bluetooth support
+ - Motion-Mail
+	 - Bluetooth (RSSI) support
 	 - IPv6 support
 	 - POP3 mail protocol support
- - Security
+	 - Selective email recipients/messages (based on Motion conversion specifiers (<%D %f %t>)
+ - Motion-Monitor
 	 - Add device monitoring logic
 		 - Permit (deviceA OR deviceB) logic in addition to (deviceA AND deviceB)
 	 - Configurable delay times for Motion daemon start/stop
