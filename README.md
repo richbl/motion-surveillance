@@ -49,7 +49,7 @@ Operationally, Motion-Monitor is comprised of three component objects (or actors
 
 The activity diagram below shows the work flow for each of these components:
 
-![Motion-Surveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/security_activity_diagram.png "Motion-Surveillance Activity Diagram")
+![Motion-Surveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/motion_surveillance_activity_diagram.png "Motion-Surveillance Activity Diagram")
 
 > **Note:** additional information about the Motion-Monitor component can be found in the Motion-Surveillance installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
