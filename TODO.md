@@ -1,13 +1,13 @@
-##TODO
+##Initial Pre-Release (<1.00) Tasks
 
  - ~~Consolidate logger methods into a single lib~~
  - ~~Move lib references into ruby_libs (rename folder)~~
  - ~~Create installation document~~
  - ~~Clean up subprojects~~
 	 - ~~Mail should function apart from Security (vice-versa)~~
- - Find source file for activity diagram (or recreate)
+ - ~~Find source file for activity diagram (or recreate)~~
  - ~~Find common terminology (security vs. surveillance)~~
- - Build-in test cases (how to implement in Ruby)
+ - Add test cases (how to implement in Ruby)
 
 ##Additional Features
 
@@ -16,6 +16,6 @@
 	 - IPv6 support
 	 - POP3 mail protocol support
  - Security
-	 - Add device logic
+	 - Add device monitoring logic
 		 - Permit (deviceA OR deviceB) logic in addition to (deviceA AND deviceB)
-	 - Configurable delay times for security enable/disable
+	 - Configurable delay times for Motion daemon start/stop
