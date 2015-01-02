@@ -6,15 +6,21 @@ The installation of the Motion-Surveillance package includes:
  
    - Motion-Monitor
    - Motion-Mail
-   - Shared component libraries
+   - Shared component libraries (Lib)
 
  3. The integration of Motion-Surveillance Components with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
-> **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries when installing either component.
+> **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries (Lib) when installing either component.
 
-### 1. Install and Configure the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") Software Program
+### 0. Confirm That All Motion-Surveillance Requirements are Met Before Proceeding
 
- 1. Install the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program package.
+ 1. Review the Motion-Surveillance requirements section in `README.md` located [here](https://github.com/richbl/motion-surveillance#motion-surveillance-requirements "Requirements").
+ 
+	To summarize these requirements: the operating system is Unix-like (*e.g.*, Linux); the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program should be installed; and Ruby all required gems should be installed and fully operational.
+
+### 1. Confirm the Installation and Configuration of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") Software Program
+
+ 1. Confirm the installation of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program package.
 
 	Before installing Motion-Surveillance, the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program should to be correctly installed, configured and operational.  Details for [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") installation can be found on the [Motion website](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion").
  
@@ -37,7 +43,7 @@ The installation of the Motion-Surveillance package includes:
 
  3. Delete non-essential top-level files, but preserve all three component directories: `lib`, `motion_mail`, and `motion_monitor`.
 
-	All top-level files (*e.g.*, `README.MD`, `INSTALL.MD`, *etc.*) are not required to properly configure and run the Motion-Surveillance package. They may be safely deleted.
+	The top-level informational files (*e.g.*, `README.MD`, `INSTALL.MD`, *etc.*) are not required to properly configure and run the Motion-Surveillance package. They may be safely deleted.
 
 	As indicated above, Motion-Surveillance is organized into three separate package components. The organization of these components is represented in the structure of the parent `motion_surveillance` folder. 
 
@@ -49,12 +55,15 @@ The installation of the Motion-Surveillance package includes:
 
 	```
 	/etc/motion_surveillance/
+	|
 	├── lib
 	│   ├── lib_audio.rb
+	│   ├── lib_config.rb
 	│   ├── lib_log.rb
 	│   ├── lib_mail.rb
 	│   ├── lib_motion.rb
-	│   └── lib_network.rb
+	│   ├── lib_network.rb
+	│   └── test_libs.rb
 	|
 	├── motion_mail
 	│   ├── motion_mail_config.rb
@@ -72,10 +81,11 @@ The installation of the Motion-Surveillance package includes:
 
 1. Edit Motion-Surveillance `*_config.rb` configuration files.
 
-	Both Motion-Mail and Motion-Monitor should be configured for proper operation. Each component includes a separate `*_config.rb` file which serves the purpose of isolating user-configurable parameters from the rest of the code:
+	All three package components--Motion-Mail, Motion-Monitor, and the shared components library (Lib)--should be configured for proper operation. Each component includes a separate `*_config.rb` file which serves the purpose of isolating user-configurable parameters from the rest of the code:
 	
 	- 	`motion_monitor_config.rb`, found in the `/etc/motion_surveillance/motion_monitor` folder, is used for configuring component logging options and for setting network parameters used to automate the management of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 	- `motion_mail_config.rb`, found in the `/etc/motion_surveillance/motion_mail` folder, is used primarily to configure SMTP mail settings, as well as component logging options.
+	- `lib_config.rb`, found in the `/etc/motion_surveillance/lib` folder, is used to configure the location of system-level commands (*e.g.*, /bin/ping). In general, these settings will not need to be changed.
 
 	Each configuration file is self-documenting and in most cases, provides examples of common default values.
 
@@ -89,16 +99,16 @@ Motion-Monitor is responsible for the starting/stopping of the [Motion](http://w
 
 		$ sudo crontab -e
 
-	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_monitor_manager.rb` every 3 minutes as shown in the example below:
+	This command will open the *crontab* editor. Once in the editor, create a new line that will run `motion_monitor_manager.rb` every 2 minutes as shown in the example below:
 
 		# For more information see the manual pages of crontab(5) and cron(8)
 		#
 		# m h  dom mon dow   command
-	*/3 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manager.rb
+	/2 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manager.rb
 
 	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manager.rb` as appropriate.
 
-	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manager.rb`) will "wake up" every 3 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
+	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manager.rb`) will "wake up" every 2 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 
 ##5. Integrate Motion-Mail with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
@@ -121,5 +131,9 @@ These commands are saved in the [Motion](http://www.lavrsen.dk/foswiki/bin/view/
 2. Restart [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") to have the update to `motion.conf` take effect. 
 
 		$ sudo /etc/init.d/motion restart
+		
+	or
+
+		$ sudo service motion restart
 		
 Motion-Mail will now generate and send an email whenever [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") generates an `on_picture_save` or `on_movie_end` command.
