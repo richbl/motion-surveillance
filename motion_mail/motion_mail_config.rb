@@ -11,7 +11,7 @@ module MotionMailConfig
   #
   # enable (1) or disable (0) application logging
   #
-  LOGGING = 1
+  LOGGING = 0
 
   # -----------------------------------------------------------------------------------------------
   #

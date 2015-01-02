@@ -5,20 +5,19 @@
 # that can be found in the LICENSE file
 #
 
-require_relative 'lib_config'
-
-module LibAudio
+module LibConfig
 
   # -----------------------------------------------------------------------------------------------
   #
-  # self.play_audio(audio_file) uses shell aplay command (system default) to play audio_file
-  # returning bool on success/failure
+  # fullpath of various system commands
   #
-  def self.play_audio(audio_file)
-
-    results = system("#{LibConfig::APLAY} -q " + audio_file)
-    return (results)
-
-  end
+  # NOTE: these commands can be executed from a cron job, so absolute paths should be specified
+  #
+  APLAY = "/usr/bin/aplay"
+  ARP = "/usr/sbin/arp"
+  GREP = "/bin/grep"
+  KILLALL = "/usr/bin/killall"
+  PING = "/bin/ping"
+  PS = "/bin/ps"
 
 end

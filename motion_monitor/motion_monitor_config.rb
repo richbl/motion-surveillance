@@ -11,7 +11,7 @@ module MotionMonitorConfig
   #
   # enable (1) or disable (0) application logging
   #
-  LOGGING = 1
+  LOGGING = 0
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -24,8 +24,8 @@ module MotionMonitorConfig
   # -----------------------------------------------------------------------------------------------
   #
   # location of logfile (full path)
-  # by default, this is in the motion_monitor folder (e.g., 
-  # /etc/motion_surveillance/motion_monitor)
+  #
+  # by default, this is in the local folder (e.g., /etc/motion_surveillance/motion_monitor)
   #
   # ignored if LOGGING == 0
   #
@@ -40,6 +40,8 @@ module MotionMonitorConfig
   # -----------------------------------------------------------------------------------------------
   #
   # the command used to spawn the monitor process when motion is active
+  #
+  # by default, this is in the local folder (e.g., /etc/motion_surveillance/motion_monitor)
   #
   # additionally, this variable is used to uniquely identify the active ruby process using the
   # shell grep to determine if the process is running
@@ -56,6 +58,8 @@ module MotionMonitorConfig
   #
   # the audio file played when the motion daemon is activated
   #
+  # by default, this is in the local folder (e.g., /etc/motion_surveillance/motion_monitor)
+  #
   # ignored if PLAY_AUDIO == 0
   #
   AUDIO_MOTION_START = File.expand_path(File.dirname(__FILE__)) + '/motion_start.wav'
@@ -63,6 +67,8 @@ module MotionMonitorConfig
   # -----------------------------------------------------------------------------------------------
   #
   # the audio file played when the motion daemon is deactivated
+  #
+  # by default, this is in the local folder (e.g., /etc/motion_surveillance/motion_monitor)
   #
   # ignored if PLAY_AUDIO == 0
   #
@@ -91,7 +97,7 @@ module MotionMonitorConfig
   #
   # MAC addresses of device(s) to search for on the LAN
   #
-  # NOTE: the assumption is that these devices are active on the LAN, else they won't be detected
+  # NOTE: the assumption is that these devices are on the LAN, else they won't be detected
   # when ping'd
   #
   MACS_TO_FIND = ['80:96:b1:93:5b:41', '80:96:b1:94:d7:a5']

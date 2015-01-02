@@ -5,16 +5,16 @@
 # that can be found in the LICENSE file
 #
 
+require 'mail'
+require 'time'
+require 'logger'
+require 'pathname'
+
+require_relative '../lib/lib_mail'
+require_relative '../lib/lib_log'
+require_relative 'motion_mail_config'
+
 class MotionMail
-
-  require 'mail'
-  require 'time'
-  require 'logger'
-  require 'pathname'
-
-  require_relative '../lib/lib_mail'
-  require_relative '../lib/lib_log'
-  require_relative 'motion_mail_config'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -24,7 +24,7 @@ class MotionMail
   #   event_number - Motion-generated event number
   #   event_date - Motion-generated event datetime
   #
-  # NOTE that this method assumes that media_filename follows the default Motion file-naming
+  # NOTE: this method assumes that media_filename follows the default Motion file-naming
   # convention of %v-%Y%m%d%H%M%S (for movies) or %v-%Y%m%d%H%M%S-%q (for pictures), where:
   #
   #   %v - Motion-generated event number

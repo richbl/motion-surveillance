@@ -5,16 +5,15 @@
 # that can be found in the LICENSE file
 #
 
+require 'logger'
+
+require_relative '../lib/lib_motion'
+require_relative '../lib/lib_network'
+require_relative '../lib/lib_audio'
+require_relative '../lib/lib_log'
+require_relative 'motion_monitor_config'
+
 class MotionMonitorDaemon
-
-  require 'logger'
-
-  require_relative '../lib/lib_motion'
-  require_relative '../lib/lib_network'
-  require_relative '../lib/lib_audio'
-  require_relative '../lib/lib_log'
-
-  require_relative 'motion_monitor_config'
 
   LibLog::create_logfile(MotionMonitorConfig::LOGGING, MotionMonitorConfig::LOG_LOCATION, MotionMonitorConfig::LOG_FILENAME)
 
@@ -38,15 +37,19 @@ class MotionMonitorDaemon
     #
     if LibNetwork::find_macs(MotionMonitorConfig::MACS_TO_FIND)
 
-      if (MotionMonitorConfig::PLAY_AUDIO.eql? 1)
-        LibAudio::play_audio(MotionMonitorConfig::AUDIO_MOTION_STOP)
+      if LibMotion::motion_daemon('stop').eql? true
+
+        if $LOG
+          $LOG.info "monitor_daemon stopping"
+        end
+
+        if MotionMonitorConfig::PLAY_AUDIO.eql? 1
+          LibAudio::play_audio(MotionMonitorConfig::AUDIO_MOTION_STOP)
+
+        end
+
       end
 
-      if $LOG
-        $LOG.info "monitor_daemon found device macs, so stop motion_daemon if running"
-      end
-
-      LibMotion::motion_daemon('stop')
       exit
 
     end

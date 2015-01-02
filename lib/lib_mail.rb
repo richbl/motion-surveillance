@@ -5,9 +5,9 @@
 # that can be found in the LICENSE file
 #
 
-module LibMail
+require 'mail'
 
-  require 'mail'
+module LibMail
 
   # -----------------------------------------------------------------------------------------------
   #

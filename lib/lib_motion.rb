@@ -5,6 +5,8 @@
 # that can be found in the LICENSE file
 #
 
+require_relative 'lib_config'
+
 module LibMotion
 
   # -----------------------------------------------------------------------------------------------
@@ -13,7 +15,7 @@ module LibMotion
   #
   def self.running_motion
 
-    results = %x[ps -A| grep motion]
+    results = %x[#{LibConfig::PS} -A| #{LibConfig::GREP} motion]
     return (!results.empty?)
 
   end
@@ -21,8 +23,6 @@ module LibMotion
   # -----------------------------------------------------------------------------------------------
   #
   # self.motion_daemon(command) enable/disables motion using motion command (daemon)
-  #
-  # alternatively could implement lwp-request as motion uses a restful interface (http)
   #
   def self.motion_daemon(command)
 
@@ -44,7 +44,7 @@ module LibMotion
 
       if running_motion
 
-        %x[killall motion]
+        %x[#{LibConfig::KILLALL} motion]
         return true
 
       else

@@ -5,16 +5,16 @@
 # that can be found in the LICENSE file
 #
 
+require 'logger'
+
+require_relative '../lib/lib_config'
+require_relative '../lib/lib_motion'
+require_relative '../lib/lib_network'
+require_relative '../lib/lib_audio'
+require_relative '../lib/lib_log'
+require_relative 'motion_monitor_config'
+
 class MotionMonitorManager
-
-  require 'logger'
-
-  require_relative '../lib/lib_motion'
-  require_relative '../lib/lib_network'
-  require_relative '../lib/lib_audio'
-  require_relative '../lib/lib_log'
-
-  require_relative 'motion_monitor_config'
 
   # -----------------------------------------------------------------------------------------------
   #
@@ -24,13 +24,13 @@ class MotionMonitorManager
   def self.monitor_daemon_running
 
     if $LOG
-      $LOG.info "check for daemon start"
+      $LOG.info "check for monitor_daemon start"
     end
 
-    results = !(IO.popen("ps -ef | grep '#{MotionMonitorConfig::RUBY_EXEC}' | grep '#{MotionMonitorConfig::DAEMON_NAME}' | grep -v grep").read).empty?
+    results = !(IO.popen("'#{LibConfig::PS}' -ef | '#{LibConfig::GREP}' '#{MotionMonitorConfig::RUBY_EXEC}' | '#{LibConfig::GREP}' '#{MotionMonitorConfig::DAEMON_NAME}' | '#{LibConfig::GREP}' -v grep").read).empty?
 
     if $LOG
-      $LOG.info "check for daemon end"
+      $LOG.info "check for monitor_daemon end"
     end
 
     return (results)
@@ -49,7 +49,17 @@ class MotionMonitorManager
   #
   LibLog::create_logfile(MotionMonitorConfig::LOGGING, MotionMonitorConfig::LOG_LOCATION, MotionMonitorConfig::LOG_FILENAME)
 
+  if $LOG
+    $LOG.info "motion_monitor_manager begin"
+  end
+
   if monitor_daemon_running
+
+    if $LOG
+      $LOG.info "monitor_daemon already running"
+      $LOG.info "motion_monitor_manager end"
+    end
+
     exit
   end
 
@@ -86,6 +96,10 @@ class MotionMonitorManager
     # this process emulates a cron job, but at a faster refresh interval (as defined in
     # MotionMonitorConfig::CHECK_INTERVAL) as cron is only good down to one minute intervals
     #
+    if $LOG
+      $LOG.info "monitor_daemon starting"
+    end
+
     spawn(MotionMonitorConfig::RUBY_EXEC + " " + MotionMonitorConfig::DAEMON_NAME)
 
   else
@@ -96,10 +110,19 @@ class MotionMonitorManager
 
     if LibMotion::motion_daemon('stop').eql? true
 
-      if MotionMonitorConfig::PLAY_AUDIO.eql? 1
-        LibAudio::play_audio(MotionMonitorConfig::AUDIO_MOTION_STOP)
+      if $LOG
+        $LOG.info "monitor_daemon stopping"
       end
 
+      if MotionMonitorConfig::PLAY_AUDIO.eql? 1
+        LibAudio::play_audio(MotionMonitorConfig::AUDIO_MOTION_STOP)
+
+      end
+
+    end
+
+    if $LOG
+      $LOG.info "motion_monitor_manager end"
     end
 
   end
