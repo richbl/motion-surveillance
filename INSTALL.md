@@ -104,7 +104,7 @@ Motion-Monitor is responsible for the starting/stopping of the [Motion](http://w
 		# For more information see the manual pages of crontab(5) and cron(8)
 		#
 		# m h  dom mon dow   command
-	/2 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manager.rb
+	\*/2 * * * * /usr/bin/ruby /etc/motion_surveillance/motion_monitor/motion_monitor_manager.rb
 
 	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manager.rb` as appropriate.
 
