@@ -132,9 +132,9 @@ Motion-Monitor is responsible for the starting/stopping of the [Motion](http://w
 		# For more information see the manual pages of crontab(5) and cron(8)
 		#
 		# m h  dom mon dow   command
-	\*/2 * * * * /usr/bin/ruby /etc/motion-surveillance/motion_monitor/motion_monitor_manager.rb
+	\*/2 * * * * /usr/bin/ruby2.1 /etc/motion-surveillance/motion_monitor/motion_monitor_manager.rb
 
-	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also be sure to change the pathname of `motion_monitor_manager.rb` as appropriate.
+	> 	**Note:** the location of the Ruby binary may differ depending on the OS distribution. Also use the actual Ruby binary name, and not a symbolic link to the binary (*e.g.*, a call to `which ruby` will return a symbolic link and not the actual Ruby binary name). A quick way to confirm the actual Ruby binary location and name is to run `RbConfig::CONFIG['bindir']` and `RbConfig::CONFIG['ruby_install_name']` in the Ruby interpreter (IRB).
 
 	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manager.rb`) will "wake up" every 2 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 	
