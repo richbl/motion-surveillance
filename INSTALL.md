@@ -105,7 +105,7 @@ These commands are saved in the [Motion](http://www.lavrsen.dk/foswiki/bin/view/
 
 	The easiest way to edit this file is to append the `on_picture_save` or `on_movie_end` command at the end of the `motion.conf` file. For example:
 
-		$ echo 'on_picture_save /usr/bin/ruby /etc//motion_mail/motion_mail.rb %D %f %t' >> /etc/motion/motion.conf
+		$ echo 'on_picture_save /usr/bin/ruby /etc/motion-surveillance/motion_mail/motion_mail.rb %D %f %t' >> /etc/motion/motion.conf
 
 2. Restart [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") to have the update to `motion.conf` take effect. 
 
