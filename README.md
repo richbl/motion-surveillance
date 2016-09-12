@@ -1,9 +1,9 @@
 ##Motion-Surveillance
 
-Motion-Surveillance is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. Motion-Surveillance includes the following package components:
+**Motion-Surveillance** is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. Motion-Surveillance includes the following package components:
 
    - Motion-Monitor: integrated system services that monitor the status of devices on a given network, and start/stop the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") package as appropriate.
-   - Motion-Mail: a configurable component for sending an email whenever [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") generates a motion-related event.
+   - Motion-Mail: a configurable component for generating and sending an email with images whenever [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") generates a motion-related event.
 
 > **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries (Lib) when installing either component.
 
@@ -19,6 +19,7 @@ Motion-Surveillance is a Ruby-based video surveillance system using the [Motion]
 			 - Multiple [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") device support
 			 - IPv4 protocol support
 			 - IPv6 protocol support [planned]
+		 - 'Always On' feature enables [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") based on time-of-day (*e.g*., enable during nighttime hours)
 		 - Bluetooth sensing (RSSI) [planned]
 		 - Optionally play an audio file on surveillance system enable/disable
 		 - Event logging
@@ -29,8 +30,8 @@ Motion-Surveillance is a Ruby-based video surveillance system using the [Motion]
 		 - Configurable message body
 		 - Optionally attach event image or video in email
 		 - SMTP-support for compatibility with most webmail services (*e.g.*, [Gmail](http://gmail.com "Google Gmail"))
-		 - POP3-support [planned]
 		 - Event logging
+		 - POP3-support [planned]
  
 ##How Motion-Surveillance Works
 
@@ -41,6 +42,8 @@ Motion-Monitor is responsible for starting/stopping the [Motion](http://www.lavr
 
 It does this by periodically scanning a network for the existence of a monitored device(s). This device can be anything that exposes its MAC address on the network (*e.g.*, a mobile phone on a home LAN). In the default case, if that device is found on the network, it's assumed that "someone is home" and so, [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is not started (or stopped if already running). If that device it no longer joined network, it's assumed that "nobody is home" and [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is started (if not already running). Similar logic is used in the reverse case: when a monitored device is once again "back home," [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is stopped.
 
+Alternatively, the 'Always On' feature, if enabled, uses time-of-day to start/stop the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software package. Motion-Monitor will look at the time range specified, and if the current time falls between the time range, [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") will be activated. Once the current time falls outside of the specified time range, [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is then stopped. The optional 'Always On' feature works in conjunction with IoT device detection.
+
 Operationally, Motion-Monitor is comprised of three component objects (or actors): 
 
 - **System**: a system cron job that periodically wakes up the **MotionMonitorManager** component
@@ -49,7 +52,7 @@ Operationally, Motion-Monitor is comprised of three component objects (or actors
 
 The activity diagram below shows the work flow for each of these components:
 
-![Motion-Surveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/motion_surveillance_activity_diagram.png "Motion-Surveillance Activity Diagram")
+![Motion-Surveillance Activity Diagram](https://raw.githubusercontent.com/richbl/motion-surveillance/master/activity_diagram.png "Motion-Surveillance Activity Diagram")
 
 > **Note:** additional information about the Motion-Monitor component can be found in the Motion-Surveillance installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
@@ -91,7 +94,7 @@ For complete details on Motion-Surveillance installation, see the installation f
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Business Learning Incorporated
+Copyright (c) Business Learning Incorporated
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
