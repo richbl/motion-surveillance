@@ -1,29 +1,44 @@
 #
-# Copyright (C) 2015 Business Learning Incorporated (www.businesslearninginc.com)
+# Copyright (C) Business Learning Incorporated (www.businesslearninginc.com)
 #
 # Use of this source code is governed by an MIT-style license
 # that can be found in the LICENSE file
 #
 
-module LibLog
+require 'logger'
 
-  # -----------------------------------------------------------------------------------------------
-  #
-  # self.create_logfile(bLogging, logLocation, logFilename) creates an application log file
+# ---------------------------------------------------------------------------
+# logging library
+#
+module LibLog
+  def logger
+    LibLog.logger
+  end
+
+  # ---------------------------------------------------------------------------
+  # creates an application log file object
   #
   # see logger documentation (http://www.ruby-doc.org/stdlib-2.1.0/libdoc/logger/rdoc/Logger.html)
   # for logfile management options
   #
-  # NOTE: this log file is recreated whenever >50MB in size
+  # NOTE: this log file is recreated when it exceeds 50MB in size
   #
-  def self.create_logfile(bLogging, logLocation, logFilename)
+  def self.create_logfile(logger_type, log_location, log_filename)
+    case logger_type
 
-    if bLogging.eql? 1
+    when 1
+      @logger ||= Logger.new(log_location + '/' + log_filename, 0,
+                             50 * 1024 * 1024)
 
-      $LOG = Logger.new(logLocation + '/' + logFilename, 0, 50 * 1024 * 1024)
-
+    when 2
+      @logger ||= Logger.new(STDOUT)
     end
-
   end
 
+  # ---------------------------------------------------------------------------
+  # expose the logging (logger) object
+  #
+  def self.logger
+    @logger
+  end
 end
