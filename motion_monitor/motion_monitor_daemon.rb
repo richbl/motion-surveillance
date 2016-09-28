@@ -39,17 +39,31 @@ class MotionMonitorDaemon
   end
 
   # ---------------------------------------------------------------------------
+  # self.calc_date_range checks to see if the configured time range crosses
+  # into the next day, and determines time range accordingly
+  #
+  def self.calc_date_range
+    cur_time = Time.new.strftime('%H%M')
+
+    if MotionMonitorConfig::ALWAYS_ON_START_TIME >
+       MotionMonitorConfig::ALWAYS_ON_END_TIME
+      cur_time <= MotionMonitorConfig::ALWAYS_ON_START_TIME &&
+        cur_time > MotionMonitorConfig::ALWAYS_ON_END_TIME
+    else
+      cur_time <= MotionMonitorConfig::ALWAYS_ON_START_TIME ||
+        cur_time > MotionMonitorConfig::ALWAYS_ON_END_TIME
+    end
+  end
+
+  # ---------------------------------------------------------------------------
   # self.time_out_of_range checks to see if the current time is out of
   # 'always on' range
   #
   def self.time_out_of_range
-    return true if MotionMonitorConfig::SCAN_FOR_TIME.zero?
+    return false if MotionMonitorConfig::SCAN_FOR_TIME.zero?
 
     logging 'scan for time out of range'
-
-    cur_time = Time.new
-    cur_time.strftime('%H%M') < MotionMonitorConfig::ALWAYS_ON_START_TIME ||
-      cur_time.strftime('%H%M') >= MotionMonitorConfig::ALWAYS_ON_END_TIME
+    calc_date_range
   end
 
   # ---------------------------------------------------------------------------

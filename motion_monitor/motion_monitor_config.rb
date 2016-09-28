@@ -87,7 +87,7 @@ module MotionMonitorConfig
   #
   # ignored if SCAN_FOR_TIME == 0
   #
-  ALWAYS_ON_START_TIME = '1100'.freeze
+  ALWAYS_ON_START_TIME = '2300'.freeze
   ALWAYS_ON_END_TIME = '0400'.freeze
 
   # ---------------------------------------------------------------------------
