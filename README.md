@@ -1,4 +1,4 @@
-##Motion-Surveillance
+## Motion-Surveillance
 
 **Motion-Surveillance** is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. Motion-Surveillance includes the following package components:
 
@@ -7,7 +7,7 @@
 
 > **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries (Lib) when installing either component.
 
-##Features
+## Features
 
  - [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") Software Package
  
@@ -33,11 +33,11 @@
 		 - Event logging
 		 - POP3-support [planned]
  
-##How Motion-Surveillance Works
+## How Motion-Surveillance Works
 
 Each of the Motion-Surveillance package components perform independent services that are integrated with the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software package.
 
-###Motion-Monitor Operation
+### Motion-Monitor Operation
 Motion-Monitor is responsible for starting/stopping the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software package. 
 
 It does this by periodically scanning a network for the existence of a monitored device(s). This device can be anything that exposes its MAC address on the network (*e.g.*, a mobile phone on a home LAN). In the default case, if that device is found on the network, it's assumed that "someone is home" and so, [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is not started (or stopped if already running). If that device MAC is no longer found on the network, it's assumed that "nobody is home" and [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is started (if not already running). Similar logic is used in the reverse case: when a monitored device is once again "back home," [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") is stopped.
@@ -56,7 +56,7 @@ The activity diagram below shows the work flow for each of these components:
 
 > **Note:** additional information about the Motion-Monitor component can be found in the Motion-Surveillance installation file ([`INSTALL.md`](https://github.com/richbl/motion-surveillance/blob/master/INSTALL.md "INSTALL.md")).
 
-###Motion-Mail Operation
+### Motion-Mail Operation
 
 Motion-Mail is the Motion-Surveillance component responsible for sending an email whenever a valid movement event is triggered in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion").
 
