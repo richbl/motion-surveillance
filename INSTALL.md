@@ -1,4 +1,4 @@
-##Motion-Surveillance Installation
+## Motion-Surveillance Installation
 The installation of the Motion-Surveillance package includes:
 
  1. The installation and configuration of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") software program
@@ -89,7 +89,7 @@ The installation of the Motion-Surveillance package includes:
 
 	Each configuration file is self-documenting and in most cases, provides examples of common default values.
 
-##4. Integrate Motion-Mail with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
+## 4. Integrate Motion-Mail with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
 Motion-Mail is the Motion-Surveillance component responsible for sending an email whenever a valid movement event is triggered in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"). These events are triggered through the [*on_picture_save* command ](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnPictureSave "on_picture_save command") and the [on_movie_end command](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigOptionOnMovieEnd "on_movie_end command") in [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") and are how Motion-Mail gets called. 
 
@@ -117,7 +117,7 @@ These commands are saved in the [Motion](http://www.lavrsen.dk/foswiki/bin/view/
 		
 Motion-Mail will now generate and send an email whenever [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") generates an `on_picture_save` or `on_movie_end` command.
 
-##5. Integrate Motion-Monitor with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
+## 5. Integrate Motion-Monitor with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion")
 
 Motion-Monitor is responsible for the starting/stopping of the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon in response to the presence of Internet of Things ([IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things")) device IDs (*i.e.*, MAC addresses) on a given network. To integrate this package with [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion"), a separate job scheduler is needed to periodically "wake up" the Motion-Monitor component to check the status of devices on the monitored network. This is done through the implementation of a [cron job](http://en.wikipedia.org/wiki/Cron "Cron") that periodically executes the `motion_monitor_manager.rb` file.
 
@@ -138,7 +138,7 @@ Motion-Monitor is responsible for the starting/stopping of the [Motion](http://w
 
 	After saving the updated *crontab*, Motion-Monitor (by way of `motion_monitor_manager.rb`) will "wake up" every 2 minutes to check the state of defined [IoT](http://en.wikipedia.org/wiki/Internet_of_Things "Internet of Things") devices on the network, and start the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") daemon.
 	
-##6. Final
+## 6. Final
 
 At this point, the Motion-Surveillance package should now be properly installed and configured. Once the cron job has been created, Motion-Surveillance should:
  1. Watch for relevant device IDs present on the network at a regular interval.
