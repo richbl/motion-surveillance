@@ -1,11 +1,11 @@
 ## Motion-Surveillance
 
+> **Note:** If you're interested in this project, consider taking a look at the [**DMS<sup>3</sup>**](https://github.com/richbl/go-distributed-motion-s3 "Distributed Motion Surveillance Security System") project, which is a refactor of this project, rewritten in Go, and features greater functionality.
+
 **Motion-Surveillance** is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. Motion-Surveillance includes the following package components:
 
    - Motion-Monitor: integrated system services that monitor the status of devices on a given network, and start/stop the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") package as appropriate.
    - Motion-Mail: a configurable component for generating and sending an email with images whenever [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") generates a motion-related event.
-
-> **Note:** either of the two package components (Motion-Monitor and Motion-Mail) can be installed separately: it's only important to install the shared component libraries (Lib) when installing either component.
 
 ## Features
 
