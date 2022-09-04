@@ -1,6 +1,7 @@
 ## Motion-Surveillance
 
-> **Note:** If you're interested in this project, consider taking a look at the [**DMS<sup>3</sup>**](https://github.com/richbl/go-distributed-motion-s3 "Distributed Motion Surveillance Security System") project, which is a refactor of this project, rewritten in Go, and features greater functionality.
+> **DEPRECATED PROJECT**: note that this project has been replaced by a backward-compatible project located at [**DMS<sup>3</sup>**](https://github.com/richbl/go-distributed-motion-s3 "Distributed Motion Surveillance Security System"), which is a refactor of this project rewritten in Go, and features greater features, stability, and functionality.
+
 
 **Motion-Surveillance** is a Ruby-based video surveillance system using the [Motion](http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome "Motion") motion detection software package. Motion-Surveillance includes the following package components:
 
